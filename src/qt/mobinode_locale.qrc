@@ -1,0 +1,36 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/mobinode_bg.qm</file>
+        <file alias="ca">locale/mobinode_ca.qm</file>
+        <file alias="cs">locale/mobinode_cs.qm</file>
+        <file alias="da">locale/mobinode_da.qm</file>
+        <file alias="de">locale/mobinode_de.qm</file>
+        <file alias="en">locale/mobinode_en.qm</file>
+        <file alias="en_US">locale/mobinode_en_US.qm</file>
+        <file alias="eo">locale/mobinode_eo.qm</file>
+        <file alias="es">locale/mobinode_es.qm</file>
+        <file alias="es_ES">locale/mobinode_es_ES.qm</file>
+        <file alias="fi">locale/mobinode_fi.qm</file>
+        <file alias="fr_FR">locale/mobinode_fr_FR.qm</file>
+        <file alias="hi_IN">locale/mobinode_hi_IN.qm</file>
+        <file alias="hr">locale/mobinode_hr.qm</file>
+        <file alias="hr_HR">locale/mobinode_hr_HR.qm</file>
+        <file alias="it">locale/mobinode_it.qm</file>
+        <file alias="ja">locale/mobinode_ja.qm</file>
+        <file alias="ko_KR">locale/mobinode_ko_KR.qm</file>
+        <file alias="lt_LT">locale/mobinode_lt_LT.qm</file>
+        <file alias="nl">locale/mobinode_nl.qm</file>
+        <file alias="pl">locale/mobinode_pl.qm</file>
+        <file alias="pt">locale/mobinode_pt.qm</file>
+        <file alias="pt_BR">locale/mobinode_pt_BR.qm</file>
+        <file alias="ro_RO">locale/mobinode_ro_RO.qm</file>
+        <file alias="ru">locale/mobinode_ru.qm</file>
+        <file alias="sk">locale/mobinode_sk.qm</file>
+        <file alias="sv">locale/mobinode_sv.qm</file>
+        <file alias="tr">locale/mobinode_tr.qm</file>
+        <file alias="uk">locale/mobinode_uk.qm</file>
+        <file alias="vi">locale/mobinode_vi.qm</file>
+        <file alias="zh_CN">locale/mobinode_zh_CN.qm</file>
+        <file alias="zh_TW">locale/mobinode_zh_TW.qm</file>
+    </qresource>
+</RCC>

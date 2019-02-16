@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Mobinode
+Comment=Mobinode P2P Cryptocurrency
+Comment[fr]=Mobinode, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Mobinode, eşten eşe kriptografik sanal para birimi
+Exec=mobinode-qt %u
+Terminal=false
+Type=Application
+Icon=mobinode128
+MimeType=x-scheme-handler/mobinode;
+Categories=Office;Finance;

@@ -1,0 +1,11 @@
+[Protocol]
+exec=mobinode-qt '%u'
+protocol=mobinode
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false
