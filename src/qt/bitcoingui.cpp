@@ -599,6 +599,9 @@ void BitcoinGUI::createToolBars()
 		setCentralWidget(containerWidget);
 	}
 }
+
+// Loading Banner Credits goes to altbetdev & project https://altbet.io
+
 void BitcoinGUI::timerTickSlot()
 {
 

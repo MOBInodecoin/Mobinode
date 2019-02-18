@@ -338,6 +338,9 @@ void OverviewPage::updateDisplayUnit()
 	}
 }
 
+
+// Blockchain Info and Statistics Credits goes to esbc dev
+
 double roi1;
 void OverviewPage::updateMasternodeInfo()
 {
