@@ -104,6 +104,8 @@ public:
 
     CBaseChainParams::Network NetworkID() const { return networkID; }
 
+	int64_t WalletForkBlock() const { return nWalletForkBlock; }
+
     /** Zerocoin **/
     std::string Zerocoin_Modulus() const { return zerocoinModulus; }
     libzerocoin::ZerocoinParams* Zerocoin_Params(bool useModulusV1) const;
@@ -184,6 +186,8 @@ protected:
     int nZerocoinStartHeight;
     int nZerocoinStartTime;
     int nZerocoinRequiredStakeDepth;
+
+	int nWalletForkBlock;
 
     int nBlockEnforceSerialRange;
     int nBlockRecalculateAccumulators;

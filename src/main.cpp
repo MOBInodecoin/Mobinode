@@ -1947,70 +1947,73 @@ int64_t GetBlockValue(int nHeight)
 		nSubsidy = 5.7 * COIN;
 	}
 	else if (nHeight <= 90000 && nHeight > 80000) {
-		nSubsidy = 6.4 * COIN;
+		nSubsidy = 11.9 * COIN;
 	}
 	else if (nHeight <= 100000 && nHeight > 90000) {
-		nSubsidy = 7 * COIN;
+		nSubsidy = 12.5 * COIN;
 	}
 	else if (nHeight <= 110000 && nHeight > 100000) {
-		nSubsidy = 7.8 * COIN;
+		nSubsidy = 13.1 * COIN;
 	}
 	else if (nHeight <= 120000 && nHeight > 110000) {
-		nSubsidy = 8.6 * COIN;
+		nSubsidy = 13.8 * COIN;
 	}
 	else if (nHeight <= 130000 && nHeight > 120000) {
-		nSubsidy = 9.35 * COIN;
+		nSubsidy = 14.6 * COIN;
 	}
-	else if (nHeight <= 150000 && nHeight > 130000) {
-		nSubsidy = 10 * COIN;
+	else if (nHeight <= 140000 && nHeight > 130000) {
+		nSubsidy = 15.3 * COIN;
+	}
+	else if (nHeight <= 150000 && nHeight > 140000) {
+		nSubsidy = 16.1 * COIN;
 	}
 	else if (nHeight <= 160000 && nHeight > 150000) {
-		nSubsidy = 10.5 * COIN;
+		nSubsidy = 16.8 * COIN;
 	}
 	else if (nHeight <= 170000 && nHeight > 160000) {
-		nSubsidy = 10.6 * COIN;
+		nSubsidy = 17.55 * COIN;
 	}
 	else if (nHeight <= 180000 && nHeight > 170000) {
-		nSubsidy = 9.55 * COIN;
+		nSubsidy = 18.2 * COIN;
 	}
 	else if (nHeight <= 190000 && nHeight > 180000) {
-		nSubsidy = 9.4 * COIN;
+		nSubsidy = 18.85 * COIN;
 	}
 	else if (nHeight <= 200000 && nHeight > 190000) {
-		nSubsidy = 8.65 * COIN;
+		nSubsidy = 19.4 * COIN;
 	}
 	else if (nHeight <= 210000 && nHeight > 200000) {
-		nSubsidy = 8.1 * COIN;
+		nSubsidy = 20 * COIN;
 	}
 	else if (nHeight <= 220000 && nHeight > 210000) {
-		nSubsidy = 7.7 * COIN;
+		nSubsidy = 20.8 * COIN;
 	}
 	else if (nHeight <= 230000 && nHeight > 220000) {
-		nSubsidy = 7.4 * COIN;
+		nSubsidy = 21.33 * COIN;
 	}
 	else if (nHeight <= 240000 && nHeight > 230000) {
-		nSubsidy = 7.1 * COIN;
+		nSubsidy = 22 * COIN;
 	}
 	else if (nHeight <= 250000 && nHeight > 240000) {
-		nSubsidy = 6.9 * COIN;
+		nSubsidy = 22.7 * COIN;
 	}
 	else if (nHeight <= 260000 && nHeight > 250000) {
-		nSubsidy = 6.4 * COIN;
+		nSubsidy = 23.4 * COIN;
 	}
 	else if (nHeight <= 270000 && nHeight > 260000) {
-		nSubsidy = 7 * COIN;
+		nSubsidy = 24 * COIN;
 	}
 	else if (nHeight <= 280000 && nHeight > 270000) {
-		nSubsidy = 7.55 * COIN;
+		nSubsidy = 24.55 * COIN;
 	}
 	else if (nHeight <= 290000 && nHeight > 280000) {
-		nSubsidy = 8 * COIN;
+		nSubsidy = 25 * COIN;
 	}
 	else if (nHeight <= 300000 && nHeight > 290000) {
-		nSubsidy = 8.5 * COIN;
+		nSubsidy = 25.6 * COIN;
 	}
 	else {
-		nSubsidy = 8.95 * COIN;
+		nSubsidy = 26.3 * COIN;
 	}
 	return nSubsidy;
 }
@@ -2031,6 +2034,26 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 		ret = blockValue * 4 / 5;  //80%;
 	}
 	return ret;
+}
+
+bool IsMasternodeCollateral(CAmount value)
+{
+    if (chainActive.Height() < Params().WalletForkBlock()) {
+        return value == MASTERNODE_COLLATERAL_OLD;
+
+    } else
+		return value == MASTERNODE_COLLATERAL_NEW;
+       
+}
+
+CAmount GetMNSpentAmount()
+{
+    if (chainActive.Height() < Params().WalletForkBlock()) {
+        return MASTERNODE_COLLATERAL_OLD - CENT;
+
+    } else {
+            return MASTERNODE_COLLATERAL_NEW - CENT;
+    }
 }
 
 bool IsInitialBlockDownload()
@@ -4014,19 +4037,21 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
 			if (block.vtx[i].IsCoinStake())
 				return state.DoS(100, error("CheckBlock() : more than one coinstake"));
 
-		CBlockIndex* pindex = NULL;
-		CTransaction txPrev;
-		uint256 hashBlockPrev = block.hashPrevBlock;
-		BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
-		if (it != mapBlockIndex.end())
-			pindex = it->second;
-		else
-			return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
+			if (!IsSporkActive(SPORK_17_DISABLE_STAKE_MINIMAL)){
+				CBlockIndex* pindex = NULL;
+				CTransaction txPrev;
+				uint256 hashBlockPrev = block.hashPrevBlock;
+				BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
+				if (it != mapBlockIndex.end())
+					pindex = it->second;
+				else
+					return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
 
-		if (!GetTransaction(block.vtx[1].vin[0].prevout.hash, txPrev, hashBlockPrev, true))
-			return state.DoS(100, error("CheckBlock() : stake failed to find vin transaction"));
-		if (txPrev.vout[block.vtx[1].vin[0].prevout.n].nValue < Params().StakeInputMinimal())
-			return state.DoS(100, error("CheckBlock() : stake input below minimum value"));
+				if (!GetTransaction(block.vtx[1].vin[0].prevout.hash, txPrev, hashBlockPrev, true))
+					return state.DoS(100, error("CheckBlock() : stake failed to find vin transaction"));
+				if (txPrev.vout[block.vtx[1].vin[0].prevout.n].nValue < Params().StakeInputMinimal())
+					return state.DoS(100, error("CheckBlock() : stake input below minimum value"));
+			}
 	}
 
 	// ----------- swiftTX transaction scanning -----------

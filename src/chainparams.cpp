@@ -68,12 +68,15 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
 	(1208, uint256("0x8cf9d2223132625ba018789341fc055915ace71892930878b8d78cbc8f85c0b6"))
 	(1840, uint256("0x2e682e9b463a6d05205b46a38717e32328b0b926b2c85e58ba56df9643955484"))
 	(3357, uint256("0xe3380d9c20fa10de562111a372385466be37dd29bde59a698266f63a6ea9b5e5"))
-
+	(77099, uint256("0x9e59978f250cf3a8dadae3fe06117e731d49c88a02c32f39a2a751346a8fc3eb"))
+	(77100, uint256("0x54041e00a50b31161db6eadf20d4c86448fe426d3ca5d3508cd1283b143d149c"))
+	(78139, uint256("0x3cdf8b855f7cbae98de3fdff443dcec877a0f568debd4952573f11ef553468aa"))
+	(78182, uint256("0xd4807a6a404a04dbd66e7856b9d9ee0a8f5b8a0819433d1c24bc0e8552b0d399"))
 ;
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-	1550205828, // * UNIX timestamp of last checkpoint block
-    3685,    // * total number of transactions between genesis and last checkpoint
+	1554874323, // * UNIX timestamp of last checkpoint block
+    171381,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2500        // * estimated number of transactions per day after checkpoint
 };
@@ -143,6 +146,9 @@ public:
         nMasternodeCountDrift = 20;
 		nStakeInputMinimal = 10 * COIN;
         nMaxMoneyOut = 35000000 * COIN;
+
+       /** Major code base update **/
+        nWalletForkBlock = 77100;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 210;

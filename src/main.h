@@ -108,6 +108,10 @@ static const unsigned int DATABASE_WRITE_INTERVAL = 3600;
 /** Maximum length of reject messages. */
 static const unsigned int MAX_REJECT_MESSAGE_LENGTH = 111;
 
+/** Masternode collateral */
+static const CAmount MASTERNODE_COLLATERAL_OLD = 1000 * COIN;
+static const CAmount MASTERNODE_COLLATERAL_NEW = 5000 * COIN;
+
 /** Enable bloom filter */
 static const bool DEFAULT_PEERBLOOMFILTERS = true;
 
@@ -234,6 +238,9 @@ bool GetTransaction(const uint256& hash, CTransaction& tx, uint256& hashBlock, b
 double ConvertBitsToDouble(unsigned int nBits);
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZMOBIStake);
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock, bool fProofOfStake);
+
+bool IsMasternodeCollateral(CAmount value);
+CAmount GetMNSpentAmount();
 
 bool ActivateBestChain(CValidationState& state, CBlock* pblock = NULL, bool fAlreadyChecked = false);
 CAmount GetBlockValue(int nHeight);
