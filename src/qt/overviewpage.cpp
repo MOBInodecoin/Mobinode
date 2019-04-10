@@ -365,9 +365,9 @@ void OverviewPage::updateMasternodeInfo()
 		if (chainActive.Height() >= 0) {
 
 			ui->roi_11->setText(mn1 == 0 ? "-" : QString::number(roi1, 'f', 0).append("  |"));
-			ui->roi_12->setText(mn1 == 0 ? " " : QString::number(1000 / roi1, 'f', 1).append(" days"));
+			ui->roi_12->setText(mn1 == 0 ? " " : QString::number(5000 / roi1, 'f', 1).append(" days"));
 		}
-		CAmount tNodesSumm = mn1 * 1000;
+		CAmount tNodesSumm = mn1 * 5000;
 		double tLocked = 100 * static_cast<double>(tNodesSumm) / static_cast<double>(chainActive.Tip()->nMoneySupply / COIN);
 		ui->label_LockedCoin_value->setText(QString::number(tNodesSumm).append(" (" + QString::number(tLocked, 'f', 1) + "%)"));
 
